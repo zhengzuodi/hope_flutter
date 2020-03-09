@@ -1,63 +1,73 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+import 'model/post.dart';
 
-class MyApp extends StatelessWidget {
+void main() => runApp(App());
+
+
+
+class App extends StatelessWidget {
+
+  Widget _listItemBuilder(BuildContext context, int index) {
+    return Container (
+      color: Colors.white,
+      margin: EdgeInsets.all(8.0),
+      child: Column(
+        children: <Widget>[
+          Image.network(posts[index].imageUrl),
+          SizedBox(height: 16.0),
+
+          Text(
+            posts[index].title,
+            style: Theme.of(context).textTheme.title,
+          ),
+
+          Text(
+            posts[index].title,
+            style: Theme.of(context).textTheme.subtitle,
+          ),
+          SizedBox(height: 16.0)
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+      home: Scaffold(
+        backgroundColor: Colors.grey[100],
+        appBar: AppBar(
+          title: Text('HOPE'),
+          elevation: 0.0,
+        ),
+        body: ListView.builder(
+          itemCount: posts.length,
+          itemBuilder: _listItemBuilder,
+        )
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      theme: ThemeData(
+        primarySwatch: Colors.yellow
+      ),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
+class Hello extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
-            ),
-          ],
+
+    return Center(
+      child: Text(
+        'hello',
+        textDirection: TextDirection.rtl,
+        style: TextStyle(
+            fontSize: 40.0,
+            fontWeight: FontWeight.bold,
+            color: Colors.black87,
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
